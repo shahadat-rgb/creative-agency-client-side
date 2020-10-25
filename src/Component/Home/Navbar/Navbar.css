@@ -1,0 +1,13 @@
+.nav-link{
+    font-weight: 700;
+}
+.nav-link:hover{
+    border-bottom: 3px solid green;
+}
+.login-btn{
+    padding: 10px 45px 10px 45px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
