@@ -1,5 +1,5 @@
 .nav-link{
-    font-weight: 700;
+    font-weight: bold;
 }
 .nav-link:hover{
     border-bottom: 3px solid green;

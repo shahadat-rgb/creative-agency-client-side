@@ -1,9 +1,10 @@
 .services-design:hover{
     box-shadow: 1px 1px 20px gray;
-    padding: 50px;
-    border-radius: 5px;
-    height: 300px;
+    border-radius: 20px;
+    border: none;
   }
   .services-design{  
       text-align: center;
+      padding: 20px;
+      border: none;
   }

@@ -9,7 +9,7 @@ const allService =[
     {
         img:service1,
         serviceName:'Web & Mobile Design',
-        serviceInfo:'we craft stunning and amazing  web ui,using a well drafted ux  to fit your product',
+        serviceInfo:'we craft stunning and amazing  web ui,using a well drafted ux  to fit your product brand stand out',
 
     },
     {
@@ -26,6 +26,7 @@ const allService =[
     },
 ]
 const Services = () => {
+    
     return (
         <div className='container'>
             <h1 className='text-center mt-5 mb-5'>
