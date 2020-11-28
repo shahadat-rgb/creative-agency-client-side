@@ -2,35 +2,51 @@ import React, { useContext } from 'react';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory,} from 'react-router-dom';
 import { UserContext } from '../../App';
 import google from '../../images/icons/google.png'
 import logo from '../../images/logos/logo.png'
 import "./Login.css"
+firebase.initializeApp(firebaseConfig)
+
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history  = useHistory();
-    const location = useLocation();
-    const { from } = location.state || { from: { pathname: "/" } };
+    // const location = useLocation();
+    // const { from } = location.state || { from: { pathname: "/" } };
 
-    if(firebase.apps.length === 0){
-        firebase.initializeApp(firebaseConfig);
-    }
+    // if(firebase.apps.length === 0){
+    //     firebase.initializeApp(firebaseConfig);
+    // }
 
     const handleGoogleSignIn = () => {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-            const {displayName, email} = result.user;
-            const signedInUser = {name: displayName, email}
-            setLoggedInUser(signedInUser)
-            history.replace(from)
-             console.log(signedInUser)
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+        .then(result=>{
+            setLoggedInUser({...loggedInUser,user:{name:result.user.displayName, email:result.user.email, img:result.user.photoURL}})
+            //get token and set it to session storage
+            firebase.auth().currentUser.getIdToken(true)
+            .then(token=>{
+               sessionStorage.setItem('token',JSON.stringify(token))
+                history.replace(history.location.location?.pathname || '/')
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        })
+    //     var provider = new firebase.auth.GoogleAuthProvider();
+    //     firebase.auth().signInWithPopup(provider).then(function(result) {
+    //         const {displayName, email} = result.user;
+    //         const signedInUser = {name: displayName, email}
+    //         setLoggedInUser(signedInUser)
+    //         history.replace(from)
+    //          console.log(signedInUser)
 
-            // ...
-          }).catch(function(error) {
-            const errorMessage = error.message;
-            console.log(errorMessage);
-          });
+    //         // ...
+    //       }).catch(function(error) {
+    //         const errorMessage = error.message;
+    //         console.log(errorMessage);
+    //       });
     }
     return (
         <body className="container google-auth">

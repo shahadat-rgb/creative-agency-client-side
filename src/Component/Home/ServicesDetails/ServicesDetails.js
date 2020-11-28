@@ -1,16 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { useContext } from 'react';
+import { Col,Card } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import './ServicesDetails.css'
-const ServicesDetails = ({serviceInfo}) => {
-    return (
-      <Link style={{textDecoration:'none',color:'black'}} to='/customerPlaceDashbord/order'>
-        <div className="services-design mt-3">
-          <img style={{ height: "65px" }} src={serviceInfo.img} alt="" />
-          <h3 className="mt-3 mb-3"> {serviceInfo.serviceName} </h3>
-          <p className="text-secondary">{serviceInfo.serviceInfo} </p>
-        </div>
-      </Link>
+const ServicesDetails = ({service}) => {
+
+  const [loggedInUser,setLoggedInUser]=useContext(UserContext)
+  const history=useHistory()
+  const orderCardHandler=()=>{
+      setLoggedInUser({...loggedInUser,service:service})
+      history.push(`/customerPlaceDashbord/order`)
+  }
+  return (
+   <Col xs={12} sm={6} md={4} className='text-center'>
+<Card onClick={orderCardHandler} className='service-details-card mt-5' style={{ width: '18rem',border:'none',margin:'auto' }}>
+    <Card.Body>
+        <img style={{width:'74px', marginBottom:'10px', borderRadius:'100%'}} src={`data:image/png;base64,${service.image.img}`} alt=""/>
+        <Card.Title style={{fontSize:'20px', fontWeight:'600', color:'#111430'}}>{service.title}</Card.Title>
+            <Card.Text style={{fontSize:'16px', fontWeight:'300'}}>
+            {service.Description}
+            </Card.Text>  
+        </Card.Body>
+    </Card>
+</Col> 
+     
     );
 };
 
 export default ServicesDetails;
+

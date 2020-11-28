@@ -4,12 +4,12 @@ import carusel2 from '../../../images/carousel-2.png'
 import carusel3 from '../../../images/carousel-3.png'
 import carusel4 from '../../../images/carousel-4.png'
 import carusel5 from '../../../images/carousel-5.png'
-import './OurWork.css'
+import './Slider.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Container } from 'react-bootstrap';
 
-const OurWork = () => {
+const Slider = () => {
     const allCarouselPic=[carusel1, carusel2, carusel3, carusel4, carusel5]
     const responsive = {
         superLargeDesktop: {
@@ -56,4 +56,4 @@ const OurWork = () => {
     );
 };
 
-export default OurWork;
+export default Slider;

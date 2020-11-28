@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import Login from './Component/Login/Login';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 import Order from './Component/CustomerPlace/Order/Order';
 import ServiceList from './Component/CustomerPlace/ServiceList/ServiceList';
@@ -19,6 +19,25 @@ import MakeAdmin from './Component/Dashbord/MakeAdmin/MakeAdmin';
 export const UserContext=createContext();
 function App() {
   const [loggedInUser,setLoggedInUser] =useState({})
+
+
+  useEffect(()=>{
+    //get token and fetch user info
+  const sessionData=sessionStorage.getItem('token')
+  const token=JSON.parse(sessionData)
+  token && fetch('https://creative-agency-fullstack.herokuapp.com',{
+    method:'GET',
+    headers:{ 
+      'Content-Type':'application/json',
+      token:token
+    }
+  })
+  .then(res=>res.json())
+  .then(result=>{
+    setLoggedInUser({...loggedInUser,user:{name:result.name, email:result.email, img:result.picture}})
+  })
+  },[])
+
   return (
     <UserContext.Provider value={[loggedInUser,setLoggedInUser]}> 
     <Router>
@@ -29,24 +48,24 @@ function App() {
           <Route path='/login'>
             <Login></Login>
           </Route>
-          <PrivateRoute path='/customerPlaceDashbord/order'>
+          <PrivateRoute exact path='/customerPlaceDashbord/order'>
                <Order></Order>
           </PrivateRoute>
-          <Route path='/customerPlaceDashbord/service-list'>
+          <PrivateRoute exact path='/customerPlaceDashbord/service-list'>
                <ServiceList></ServiceList>
-          </Route>
-          <Route path='/customerPlaceDashbord/review'>
+          </PrivateRoute>
+          <PrivateRoute exact path='/customerPlaceDashbord/review'>
                <Review></Review>
-          </Route>
-          <Route path='/adminPlaceDashbord/services-list'>
+          </PrivateRoute>
+          <PrivateRoute exact path='/adminPlaceDashbord/services-list'>
                <ServicesList></ServicesList>
-          </Route>
-          <Route path='/adminPlaceDashbord/add-service'>
+          </PrivateRoute>
+          <PrivateRoute exact path='/adminPlaceDashbord/add-service'>
                   <AddService></AddService>
-          </Route>
-          <Route path='/adminPlaceDashbord/make-admin'>
+          </PrivateRoute>
+          <PrivateRoute exact path='/adminPlaceDashbord/make-admin'>
                   <MakeAdmin></MakeAdmin>
-          </Route>
+          </PrivateRoute>
 
         </Switch>
     </Router>

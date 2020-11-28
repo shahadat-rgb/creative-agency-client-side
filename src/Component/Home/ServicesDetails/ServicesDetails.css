@@ -1,10 +1,7 @@
-.services-design:hover{
-    box-shadow: 1px 1px 21px gray;
-    border-radius: 20px;
-    border: none;
-  }
-  .services-design{  
-      text-align: center;
-      padding: 20px;
-      border: none;
-  }
+.service-details-card:hover{
+    border-radius:8px;
+    cursor:pointer;
+    transform:scale(1.08);
+    box-shadow:1px 1px 20px whitesmoke, -1px -1px 20px whitesmoke;
+    transition:transform 0.8s;
+}

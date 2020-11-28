@@ -1,14 +1,16 @@
 import React from 'react';
 import AllServiceList from '../AllServiceList/AllServiceList';
-import NavbarLeft from '../NavbarLeft/NavbarLeft';
+import Sidebar from '../Sidebar/Sidebar';
+
 
 
 const ServiceList = () => {
+
     return (
         <div className='container'>
             <div className="row">
              <div className="col-md-2">
-               <NavbarLeft></NavbarLeft>
+               <Sidebar></Sidebar>
                 </div>
                 <div className="col-md-10">
                   <AllServiceList></AllServiceList>

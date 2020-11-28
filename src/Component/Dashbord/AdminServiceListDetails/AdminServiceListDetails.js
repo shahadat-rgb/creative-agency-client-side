@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
-const AdminServiceListDetails = ({order}) => {
+const AdminServiceListDetails = ({allServiceList}) => {
     return (
       <Table responsive="xs" className="admin-services-list-table">
         <thead className="admin-services-list-table-header">
@@ -14,12 +14,12 @@ const AdminServiceListDetails = ({order}) => {
           </tr>
         </thead>
         <tbody>
-          {order.map((order) => (
+          {allServiceList.map((allServiceList) => (
             <tr>
-              <td> {order.order.name}</td>
-              <td> {order.order.email}</td>
-              <td>{order.order.projectName}</td>
-              <td>{order.order.projectDetails}</td>
+              <td> {allServiceList.name}</td>
+              <td> {allServiceList.email}</td>
+              <td>{allServiceList.serviceTitle}</td>
+              <td>{allServiceList.projectDetails}</td>
               <td>
                 <select  name="status">
                   <option>Pending</option>

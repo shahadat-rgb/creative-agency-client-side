@@ -1,14 +1,14 @@
 import React from 'react';
+import Sidebar from '../../CustomerPlace/Sidebar/Sidebar';
 import AdminServiceList from '../AdminServicesList/AdminServicesList';
 
-import NavbarLeftTwo from '../NavbarLeftTwo/NavbarLeftTwo';
 
 const ServicesList = () => {
     return (
         <div className='container'>
             <div className="row">
                <div className="col-md-2">
-                <NavbarLeftTwo></NavbarLeftTwo>
+                 <Sidebar></Sidebar>
                </div>
                <div className="col-md-10">
                 <AdminServiceList></AdminServiceList>
