@@ -54,7 +54,7 @@ const inputHandler=(e)=>{
                 <form class ='order-form-design' onSubmit={addReviewFormHandler}>
                   
                   <input name="name" value={review.name} onChange={inputHandler} ref={register({ required: true })} className='input-value mt-5 ml-5' placeholder="your name" /> <br /> <br />
-                           {errors.name && <span className="error">your nickname is required</span>}
+                           {errors.name && <span className="error">your name is required</span>}
                            
                            <input name="companyName" onBlur={inputHandler} ref={register({ required: true })} className='input-value ml-5' placeholder="Company's name Designation" /> <br /> <br />
                            {errors.companyName && <span className="error">companyName is required</span>}
