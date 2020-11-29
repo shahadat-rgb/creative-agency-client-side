@@ -1,36 +1,54 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import './AdminServiceListDetails.css'
+const AdminServiceListDetails = ({service}) => {
 
-const AdminServiceListDetails = ({allServiceList}) => {
+  const notify = () => toast("Wow! status changing");
+    const [pending, setPending]=useState(service.status ==='pending')
+    const statusHandler=(e)=>{
+        setPending(!pending)
+        fetch('http://localhost:4000/update-status',{
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({
+                status:e.target.value,
+                id:service._id
+            })
+        })
+        .then(res=>res.json())
+        .then(result=>{
+            result && notify()
+        })
+    }
+
     return (
-      <Table responsive="xs" className="admin-services-list-table">
-        <thead className="admin-services-list-table-header">
-          <tr>
-            <th style={{ width: "20%" }}>Name</th>
-            <th style={{ width: "20%" }}>Email ID</th>
-            <th style={{ width: "20%" }}>Service</th>
-            <th style={{ width: "25%" }}>Project Details</th>
-            <th style={{ width: "10%" }}>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allServiceList.map((allServiceList) => (
-            <tr>
-              <td> {allServiceList.name}</td>
-              <td> {allServiceList.email}</td>
-              <td>{allServiceList.serviceTitle}</td>
-              <td>{allServiceList.projectDetails}</td>
-              <td>
-                <select  name="status">
-                  <option>Pending</option>
-                  <option>Done</option>
-                  <option>On going</option>
-                </select>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <>
+        <tr style={{ fontWeight:'400',}}>
+            <td>{service.name}</td>
+            <td>{service.email}</td>
+            <td>{service.serviceTitle}</td>
+            <td>{service.projectDetails}</td>
+            <td>
+            {
+                pending &&
+                 <Form.Control as="select" className='text-danger' onChange={statusHandler}>
+                    <option  selected style={{color:'#FF4545'}}>Pending</option>
+                    <option style={{color:'#009444'}}>Done</option>
+                </Form.Control>
+            }
+            {
+                !pending &&
+                <Form.Control className='text-success' as="select" onChange={statusHandler}>
+                    <option style={{color:'#FF4545'}}>Pending</option>
+                    <option selected style={{color:'#009444'}}>Done</option>
+                </Form.Control>
+            }
+            </td>
+        </tr>
+        <ToastContainer bodyClassName='toast-color'/>
+
+        </>
     );
 };
 

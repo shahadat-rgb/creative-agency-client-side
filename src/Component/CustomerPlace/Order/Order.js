@@ -10,7 +10,7 @@ const Order = () => {
 const { register, errors } =useForm();
 const history=useHistory()
 const [loggedInUser,setLoggedInUser]=useContext(UserContext)
-const [order,setOrder]=useState({})
+const [order,setOrder]=useState({status:'pending'})
 
 useEffect(()=>{
   setOrder({...order,name:loggedInUser.user?.name,
