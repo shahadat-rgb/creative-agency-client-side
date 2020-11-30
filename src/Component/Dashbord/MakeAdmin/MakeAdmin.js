@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../../../App';
-import Sidebar from '../../CustomerPlace/Sidebar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
+
 
 const MakeAdmin = () => {
     const [loggedInUser,setLoggedInUser]=useContext(UserContext)
@@ -28,7 +29,7 @@ const MakeAdmin = () => {
         <div className='container'>
             <div className="row">
                 <div className="col-md-2">
-           <Sidebar></Sidebar>
+                <Sidebar></Sidebar>
                 </div>
                 <div className="col-md-10">
                    
@@ -44,7 +45,7 @@ const MakeAdmin = () => {
             </div>
                      <form class ='order-form-design' onSubmit={addAdminHandler}>
 
-                     <h4 className='ml-5  pt-5'>Email</h4>
+                     <h4 className='ml-5 mb-4  pt-5'>Email</h4>
                      <input  style={{border:'1px solid lightgray'}} name="email" ref={register({ required: true })} className='input-value ml-5' placeholder="your email address" onBlur={e=>setAdmin(e.target.value)} /> <br /> <br/>
                           {errors.email && <span className="error">your Email is required</span>}
                      <span>  <button style={{borderRadius:'8px',border:'none', marginLeft:'45px',backgroundColor:'green',color:'white',padding:'8px 23px 8px 23px'}}   type="submit">submit</button> </span>

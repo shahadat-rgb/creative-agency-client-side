@@ -1,4 +1,3 @@
-
 import { useContext } from 'react';
 import { Col,Card } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
@@ -10,7 +9,7 @@ const ServicesDetails = ({service}) => {
   const history=useHistory()
   const orderCardHandler=()=>{
       setLoggedInUser({...loggedInUser,service:service})
-      history.push(`/customerPlaceDashbord/order`)
+      history.push('/dashbord/order')
   }
   return (
    <Col xs={12} sm={6} md={4} className='text-center'>

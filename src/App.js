@@ -8,12 +8,12 @@ import {
 import Login from './Component/Login/Login';
 import { createContext, useEffect, useState } from 'react';
 import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
-import Order from './Component/CustomerPlace/Order/Order';
-import ServiceList from './Component/CustomerPlace/ServiceList/ServiceList';
-import Review from './Component/CustomerPlace/Review/Review';
-import ServicesList from './Component/Dashbord/ServicesList/ServicesList';
 import AddService from './Component/Dashbord/AddService/AddService';
 import MakeAdmin from './Component/Dashbord/MakeAdmin/MakeAdmin';
+import ServiceList from './Component/Dashbord/ServiceList/ServiceList';
+import Order from './Component/Dashbord/Order/Order';
+import Review from './Component/Dashbord/Review/Review';
+import NotFound from './Component/NotFound/NotFound';
 
 
 export const UserContext=createContext();
@@ -48,24 +48,27 @@ function App() {
           <Route path='/login'>
             <Login></Login>
           </Route>
-          <PrivateRoute exact path='/customerPlaceDashbord/order'>
-               <Order></Order>
+          <PrivateRoute exact path='/dashbord/order'>
+              <Order></Order>
           </PrivateRoute>
-          <PrivateRoute exact path='/customerPlaceDashbord/service-list'>
+          <Route path='/dashbord/service-list'>
                <ServiceList></ServiceList>
-          </PrivateRoute>
-          <PrivateRoute exact path='/customerPlaceDashbord/review'>
+          </Route>
+          
+          <Route  path='/dashbord/review'>
                <Review></Review>
-          </PrivateRoute>
-          <PrivateRoute exact path='/adminPlaceDashbord/services-list'>
-               <ServicesList></ServicesList>
-          </PrivateRoute>
-          <PrivateRoute exact path='/adminPlaceDashbord/add-service'>
+          </Route>
+        
+          <Route path='/dashbord/add-service'>
                   <AddService></AddService>
-          </PrivateRoute>
-          <PrivateRoute exact path='/adminPlaceDashbord/make-admin'>
+          </Route>
+          <Route exact path='/dashbord/make-admin'>
                   <MakeAdmin></MakeAdmin>
-          </PrivateRoute>
+          </Route>
+          <Route path='*'>
+              <NotFound></NotFound>
+          </Route>
+
 
         </Switch>
     </Router>

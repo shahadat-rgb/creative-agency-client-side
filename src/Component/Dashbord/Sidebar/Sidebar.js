@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
@@ -11,7 +11,9 @@ import './Sidebar.css'
 import { UserContext } from '../../../App';
 const Sidebar= () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-    
+
+    const userService=['Order', 'Service list', 'Review']
+    const adminService=['Service list', 'Add Service', 'Make Admin']
     const history=useHistory()
 
     const logoutHandler=()=>{
@@ -31,10 +33,10 @@ const Sidebar= () => {
               </div>
             <div>
         {
-                ['Order', 'Service list', 'Review'].map((item,index)=>{
+                  loggedInUser.admin && adminService.map((item,index)=>{
                     return(
-                    <Link style={{color:`${window.location.pathname==='/customerPlaceDashbord/'+item.toLowerCase().split(' ').join('-')?'#009444':'black'}`}}
-                        to={`/customerPlaceDashbord/${item.toLowerCase().split(' ').join('-')}`}>
+                    <Link style={{color:`${window.location.pathname ==='/dashbord/'+item.toLowerCase().split(' ').join('-')?'#009444':'black'}`}}
+                        to={`/dashbord/${item.toLowerCase().split(' ').join('-')}`}>
                         <div className='d-flex ml-3'>
                         {index===0 && <ShoppingCartOutlinedIcon></ShoppingCartOutlinedIcon>}
                         {index===1 && <LocalMallOutlinedIcon></LocalMallOutlinedIcon>}
@@ -50,10 +52,10 @@ const Sidebar= () => {
             }
 {  
     
-            ['Services list', 'Add Service', 'Make Admin'].map((item,index)=>{
-                return(
-                <Link style={{color:`${window.location.pathname==='/adminPlaceDashbord/'+item.toLowerCase().split(' ').join('-')?'#009444':'black'}`}}
-                    to={`/adminPlaceDashbord/${item.toLowerCase().split(' ').join('-')}`}>
+    !loggedInUser.admin && userService.map((item,index)=>{
+        return(
+                <Link style={{color:`${window.location.pathname==='/dashbord/'+item.toLowerCase().split(' ').join('-')?'#009444':'black'}`}}
+                    to={`/dashbord/${item.toLowerCase().split(' ').join('-')}`}>
                     <div className='d-flex ml-3'>
                     {index===0 && <LocalMallOutlinedIcon></LocalMallOutlinedIcon>}
                     {index===1 && <AddOutlinedIcon></AddOutlinedIcon>}

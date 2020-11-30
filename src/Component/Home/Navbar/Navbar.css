@@ -1,8 +1,42 @@
-.nav-link{
-    font-weight: bold;
+.matched-path{
+    font-weight:bold;
+    color:black;
+    text-decoration: underline;
+    text-decoration-color:#7AB259;
 }
-.nav-link:hover{
-    border-bottom: 3px solid green;
+.my-navlink{
+    color:black
+}
+
+.nav-items{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.toogler{
+    display:none;
+    padding: 10px;
+    width: 50px;
+    background-color:dark;
+}
+@media only screen and (max-width:991px){
+    .nav-items{
+        display:none;
+    }
+    .toogler{
+        display:block;
+    }
+    .toogled-items{
+        display:flex;
+        flex-direction: column;
+        margin-top:20px;
+    }
+    
+}
+
+.toogled-items{
+    justify-content: center;
+    align-items: center;
 }
 .login-btn{
     padding: 10px 45px 10px 45px;

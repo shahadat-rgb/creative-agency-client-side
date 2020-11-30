@@ -1,10 +1,10 @@
+import { Link } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { UserContext } from '../../../App';
-import Sidebar from '../Sidebar/Sidebar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserContext } from '../../../App';
+import Sidebar from '../Sidebar/Sidebar';
 
 const Review = () => {
   const [loggedInUser,setLoggedInUser]=useContext(UserContext)
@@ -13,7 +13,7 @@ const Review = () => {
     setReview({...review,name:loggedInUser.user?.name})
 },[loggedInUser])
 
-  const history = useHistory();
+ 
 
     const { register, errors } =useForm();
   
@@ -26,8 +26,7 @@ const addReviewFormHandler=(e)=>{
     })
     .then(res=>res.json())
     .then(result=>{
-           result && notify()
-        // history.push('/')
+          result && notify()
       
     })
   }
@@ -35,7 +34,7 @@ const inputHandler=(e)=>{
       setReview({...review, [e.target.name]:e.target.value, img:loggedInUser.user?.img})
   }
      
-  const notify = () => toast("Thank you so much for you feedback");
+  const notify = () => toast("Thank you so much for you feedback,now going to the home page and you can see the your feedback in client section");
     return (
         <div className='container'>
             <div className="row">
@@ -59,10 +58,12 @@ const inputHandler=(e)=>{
                            <input name="companyName" onBlur={inputHandler} ref={register({ required: true })} className='input-value ml-5' placeholder="Company's name Designation" /> <br /> <br />
                            {errors.companyName && <span className="error">companyName is required</span>}
 
-                           <input name="Description" onBlur={inputHandler} ref={register({ required: true })} className='input-type ml-5' placeholder="Description" /> <br /> <br />
+                           <textarea  name="Description" onBlur={inputHandler} ref={register({ required: true })} className='input-type ml-5' placeholder="Description" /> <br /> <br />
                            {errors.Description && <span className="error">Description is required</span>}
 
-                           <button className="login-btn ml-5"  type="Submit">submit</button>
+                     
+                             <button className="login-btn ml-5"  type="Submit">submit</button>
+                      
                     </form>
                 </div>
             </div>

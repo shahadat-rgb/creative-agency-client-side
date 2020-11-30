@@ -5,7 +5,7 @@ import './AdminServiceListDetails.css'
 const AdminServiceListDetails = ({service}) => {
 
   const notify = () => toast("Wow! status changing");
-    const [pending, setPending]=useState(service.status ==='pending')
+    const [pending, setPending]=useState(service.status.toLowerCase() ==='pending')
     const statusHandler=(e)=>{
         setPending(!pending)
         fetch('http://localhost:4000/update-status',{

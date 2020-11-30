@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import Sidebar from '../Sidebar/Sidebar';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../../../App';
-import Sidebar from '../../CustomerPlace/Sidebar/Sidebar';
+
 
 const AddService = () => {
     const [loggedInUser,setLoggedInUser]=useContext(UserContext)
     const [addService, setAddService] = useState(null);
     const [file, setFile] = useState(null);
-    const history =useHistory();
+
 
     const handleBlur = e => {
         const newAddService = {...addService };
@@ -33,20 +35,20 @@ const AddService = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-             if (data) {
-                alert("addService conferm successfully");
-                 history.push('/')
-             }
+             data&& notify()
+               
+            
             })
             .catch(error => {
                 console.error(error)
             })
     }
+    const notify = () => toast("Wow! Service Added for user");
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-2">
-            <Sidebar></Sidebar>
+              <Sidebar></Sidebar>
           </div>
           <div className="col-md-10">
             <div className="row">
@@ -82,9 +84,9 @@ const AddService = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1" className="ml-5">
-                  Description
+                        Description
                 </label>
-                <input
+                <textarea
                   style={{ border: "1px solid lightgray" }}
                   onBlur={handleBlur}
                   type="text"
@@ -118,6 +120,7 @@ const AddService = () => {
             </form>
           </div>
         </div>
+         <ToastContainer bodyClassName='toast-color'/>
       </div>
     );
 };

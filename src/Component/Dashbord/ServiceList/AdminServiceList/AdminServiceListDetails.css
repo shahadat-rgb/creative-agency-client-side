@@ -1,0 +1,13 @@
+
+.admin-service-list-table-head th {
+    font-weight: 300;
+  }
+  .admin-service-list-table-head tr {
+    box-sizing: none;
+    border: none;
+    background-color: rgb(255, 255, 255);
+  }
+  .admin-service-list-table {
+    font-size: 16px;
+  }
+  

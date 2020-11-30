@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
-import NavbarLeft from '../Sidebar/Sidebar';
 import './Order.css'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../App';
 import { useHistory } from 'react-router-dom';
-
+import Sidebar from '../Sidebar/Sidebar';
 
 const Order = () => {
 const { register, errors } =useForm();
@@ -15,7 +14,7 @@ const [order,setOrder]=useState({status:'pending'})
 useEffect(()=>{
   setOrder({...order,name:loggedInUser.user?.name,
     email:loggedInUser.user?.email,
-    projectImage:loggedInUser.service.image?.img,
+    projectImage:loggedInUser.service?.image.img,
             serviceTitle:loggedInUser.service?.title,
             projectDetails:loggedInUser.service?.Description,
   })
@@ -34,7 +33,7 @@ const addOrderHandler=(e)=>{
   .then(result=>{
       if (result) {
         alert('wow order conferm successfully')
-       history.push('/customerPlaceDashbord/service-list')
+       history.push('/dashbord/service-list')
       }
   })
 }
@@ -46,7 +45,7 @@ const addOrderHandler=(e)=>{
         <div className="container">
               <div className="row">
                   <div className="col-md-2">
-                     <NavbarLeft></NavbarLeft>
+                     <Sidebar></Sidebar>
                   </div>
                    <div className="col-md-10">
                      <div className="row">
@@ -68,17 +67,17 @@ const addOrderHandler=(e)=>{
                                     <input name="serviceTitle" onBlur={inputHandler} ref={register({ required: true })} className='input-value ml-5' placeholder="your project name" value={order.serviceTitle}   /> <br /> <br />
                                     {errors.serviceTitle && <span className="error">your projectName is required</span>}
 
-                                    <input name="projectDetails"  onBlur={inputHandler} ref={register({ required: true })} className='input-type ml-5' placeholder='your project details' value={order.projectDetails} /> <br /> <br />
+                                    <textarea name="projectDetails" type='text' cols="30" rows="10"  onBlur={inputHandler} ref={register({ required: true })} className=' input-type ml-5' placeholder='your project details' value={order.projectDetails} /> <br /> <br />
                                     {errors.projectDetails && <span className="error">your project details</span>}
                                       
 
-                                        <input name='price' onBlur={inputHandler} ref={register({ required: true })} className='input-value ml-5  mb-5' placeholder="price" /> <br/> <br/>
+                                        <input name='price' onBlur={inputHandler} ref={register({ required: true })} className='input-value ml-5  mb-5' placeholder="price" /> <br/>
                                         {errors.price && <span className="error">price is required</span>}
                                        
 
                                     <button className="login-btn ml-5"  type="submit">Send</button>
                                     </form>
-                                   
+                               
                                  </div>
                             </div>
                             
@@ -88,5 +87,3 @@ const addOrderHandler=(e)=>{
 };
 
 export default Order;
-
-
