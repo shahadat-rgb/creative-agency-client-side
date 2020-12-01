@@ -24,7 +24,7 @@ Node.js
 # Usage Tools:
 Heroku
 Firebase Hosting
-Firebase Tool
+Firebase Tools
 VS Code
 Git
 Github
