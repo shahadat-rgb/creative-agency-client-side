@@ -32,7 +32,7 @@ const addOrderHandler=(e)=>{
   .then(res=>res.json())
   .then(result=>{
       if (result) {
-        alert('wow order conferm successfully')
+         alert('wow order conferm successfully')
        history.push('/dashbord/service-list')
       }
   })
